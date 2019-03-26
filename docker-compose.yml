@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  database:
+    image: mariadb:latest
+    volumes:
+      - ./data:/var/lib/mysql
+      # - ./sql/:/dumps
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  opencart:
+    build:
+      context: ./opencart
+      args:
+        OPENCART_VER: ${OPENCART_VER}
+    volumes:
+      - ./upload/admin/controller/extension/${EXTENSION_NAME}.php:/var/www/html/admin/controller/extension/${EXTENSION_NAME}.php
+      - ./upload/admin/language/en-gb/extension/${EXTENSION_NAME}.php:/var/www/html/admin/language/en-gb/extension/${EXTENSION_NAME}.php
+      - ./upload/admin/view/template/extension/${EXTENSION_NAME}.twig:/var/www/html/admin/view/template/extension/${EXTENSION_NAME}.twig
+    ports:
+      - "80:80"
+
+networks:
+   default:
+     ipam:
+       driver: default
+       config:
+         - subnet: 172.16.0.0/24
