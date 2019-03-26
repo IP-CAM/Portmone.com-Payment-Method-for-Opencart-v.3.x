@@ -1,0 +1,25 @@
+<div class="container">
+    <!--  breadcrumb -->
+    <ul class="breadcrumb">
+        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+            <span class="divider"><?php echo $breadcrumb['separator']; ?></span><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+        <?php } ?>
+    </ul>
+
+    <div class="row">
+        <div class="span9">
+            <h3 class="heading1"><span class="maintext"><?php echo $text_error_note; ?></span></h3>
+            <p><?php echo $server_response; ?></p>
+            <br/><br/>
+            <div class="buttons">
+                <div class="pull-right">
+                    <a href="<?php echo $try_again_link; ?>" class="btn btn-primary"><?php echo $text_try_again; ?></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="<?php echo $cancel_link; ?>" class="btn"><?php echo $text_cancel; ?></a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>
